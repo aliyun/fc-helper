@@ -53,9 +53,12 @@ exports.handle = hook((req, res) => {
 包装后的 Response 对象：
 
 可以通过 res.type = "" 的方式设置 content-type。
+
 可以通过 res.status = 200 的方式设置 statusCode。
+
 可以通过 res.setHeader('key', 'value') 的方式设置任意 header。
-可以通过 res.send(body) 的方式设置 body。如果没有设置 content-type，会根据 body 类型自动设置 content-type
+
+可以通过 res.send(body) 的方式设置 body。如果没有设置 content-type，会根据 body 类型自动设置 content-type。
 
 - string，会自动填充类型为 text/plain
 - object，会自动填充类型为 application/json
