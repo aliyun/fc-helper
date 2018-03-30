@@ -3,4 +3,3 @@
 describe('response.js', function () {
 
 });
-
