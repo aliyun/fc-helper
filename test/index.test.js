@@ -48,7 +48,7 @@ describe('index.js', function () {
   it('should ok with raw json/object', async () => {
     var handle = hook(async function (ctx) {
       ctx.type = 'application/json';
-      ctx.body = {"ok":true};
+      ctx.body = {'ok':true};
     });
     const res = await test(handle).run('', '');
     assert.equal(res.statusCode, 200);
@@ -72,7 +72,7 @@ describe('index.js', function () {
     });
     var err;
     try {
-      const res = await test(handle).run('', '');
+      await test(handle).run('', '');
     } catch (ex) {
       err = ex;
     }
@@ -84,7 +84,7 @@ describe('index.js', function () {
     var handle = hook(function () {});
     var err;
     try {
-      const res = await test(handle).run('', '');
+      await test(handle).run('', '');
     } catch (ex) {
       err = ex;
     }
@@ -106,7 +106,7 @@ describe('index.js', function () {
     });
     var err;
     try {
-      const res = await test(handle).run('', '');
+      await test(handle).run('', '');
     } catch (ex) {
       err = ex;
     }
@@ -119,7 +119,7 @@ describe('index.js', function () {
     var handle = asyncWrap(function() {});
     var err;
     try {
-      const res = await test(handle).run('', '');
+      await test(handle).run('', '');
     } catch (ex) {
       err = ex;
     }

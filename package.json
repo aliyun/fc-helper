@@ -18,6 +18,9 @@
     "lib": "lib",
     "test": "test"
   },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JacksonTian/fc-helper.git"
