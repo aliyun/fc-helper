@@ -81,5 +81,21 @@ exports.handle = asyncWrap(async function (ctx) {
 });
 ```
 
+### 测试支持
+
+提供 test 方法，将一个函数变成一个可执行的 case，然后通过 run 方法执行。返回一个 Promise 对象。
+
+```js
+const { test, asyncWrap } = require('fc-helper');
+
+var handle = asyncWrap(async function (ctx) {
+  return 'hello world!';
+});
+const res = await test(handle).run('', '');
+assert.equal(res, 'hello world!');
+```
+
+run('event', 'contenxt') 方法接受两个参数，event 和 contentx。我们通过修改这两个值来 mock 真实环境的输入。
+
 ## License
 The MIT license
