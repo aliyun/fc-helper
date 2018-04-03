@@ -127,4 +127,66 @@ describe('index.js', function () {
     assert.ok(err);
     assert.equal(err.message, 'Must be an AsyncFunction');
   });
+
+  it('GET should ok', async () => {
+    var handle = hook(async function(ctx) {
+      ctx.body = {
+        path: ctx.path,
+        method: ctx.method,
+        query: ctx.query,
+        headers: ctx.headers,
+        params: ctx.params,
+        body: ctx.req.body
+      };
+    });
+    var q = {};
+    q.echostr = 'hehe';
+    var event = {
+      'path': '/wechat',
+      'httpMethod': 'GET',
+      'headers': {},
+      'queryParameters': q,
+      'pathParameters': {},
+      'body': '',
+      'isBase64Encoded': false
+    };
+    const data = await test(handle).run(JSON.stringify(event), {});
+    const body = JSON.parse(data.body);
+    assert.equal(body.path, '/wechat');
+    assert.equal(body.method, 'GET');
+    assert.equal(body.query.echostr, 'hehe');
+  });
+
+  it('GET should ok', async () => {
+    var handle = hook(async function(ctx) {
+      ctx.body = {
+        path: ctx.path,
+        method: ctx.method,
+        query: ctx.query,
+        headers: ctx.headers,
+        params: ctx.params,
+        body: ctx.req.body
+      };
+      ctx.req.body; // second access
+      ctx.get('content-type');
+      ctx.set('content-type', 'application/json');
+      ctx.status = 200;
+    });
+    var q = {};
+    q.echostr = 'hehe';
+    var event = {
+      'path': '/wechat',
+      'httpMethod': 'GET',
+      'headers': {'content-type': 'text/plain'},
+      'queryParameters': q,
+      'pathParameters': {},
+      'body': Buffer.from('hello world').toString('base64'),
+      'isBase64Encoded': true
+    };
+    const data = await test(handle).run(JSON.stringify(event), {});
+    const body = JSON.parse(data.body);
+    assert.equal(body.path, '/wechat');
+    assert.equal(body.method, 'GET');
+    assert.equal(body.query.echostr, 'hehe');
+  });
 });
