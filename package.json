@@ -1,6 +1,6 @@
 {
   "name": "fc-helper",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "函数计算 & API 网关辅助库",
   "main": "lib/index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   "author": "Jackson Tian",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^4.19.1",
     "expect.js": "^0.3.1",
     "mocha": "^3.5.0",
     "nyc": "^11.6.0"
