@@ -6,6 +6,7 @@
   "scripts": {
     "test": "make test"
   },
+  "typings": "typings/index.d.ts",
   "author": "Jackson Tian",
   "license": "MIT",
   "devDependencies": {
