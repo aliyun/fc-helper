@@ -66,6 +66,15 @@ describe('index.js', function () {
     assert.equal(res.body, Buffer.from('hello world!').toString('base64'));
   });
 
+  it('should ok with context', async () => {
+    var handle = hook(async function (ctx) {
+      ctx.body = ctx.requestId;
+    });
+    const res = await test(handle).run('', {requestId: 'requestId'});
+    assert.equal(res.statusCode, 200);
+    assert.equal(res.body, 'requestId');
+  });
+
   it('should ok with error', async () => {
     var handle = hook(async function (ctx) {
       throw new Error('oops');

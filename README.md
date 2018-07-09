@@ -67,6 +67,10 @@ exports.handle = hook(async function(ctx) {
 - string，会自动填充类型为 text/plain
 - object，会自动填充类型为 application/json
 
+#### Context
+
+即上文中的 ctx。ctx 除了上述的几个字段外，还包含 requestId、credentials、function 字段，即原始的 context 对象的属性。
+
 ### asyncWrap 针对普通的函数
 
 调用 return 返回的值，即结果。开发者可以编写顺序式的业务逻辑，远离回调。
@@ -76,7 +80,7 @@ exports.handle = hook(async function(ctx) {
 
 const { asyncWrap } = require('fc-helper');
 
-exports.handle = asyncWrap(async function (ctx) {
+exports.handle = asyncWrap(async function (event, context) {
   return 'hello world!';
 });
 ```
@@ -88,14 +92,14 @@ exports.handle = asyncWrap(async function (ctx) {
 ```js
 const { test, asyncWrap } = require('fc-helper');
 
-var handle = asyncWrap(async function (ctx) {
+var handle = asyncWrap(async function (event, context) {
   return 'hello world!';
 });
 const res = await test(handle).run('', '');
 assert.equal(res, 'hello world!');
 ```
 
-run('event', 'contenxt') 方法接受两个参数，event 和 contentx。我们通过修改这两个值来 mock 真实环境的输入。
+run(event, contenxt) 方法接受两个参数，event 和 contentx。我们通过修改这两个值来 mock 真实环境的输入。
 
 ## License
 The MIT license
