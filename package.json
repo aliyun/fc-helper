@@ -1,6 +1,6 @@
 {
   "name": "fc-helper",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "函数计算 & API 网关辅助库",
   "main": "lib/index.js",
   "scripts": {
