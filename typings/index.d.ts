@@ -69,9 +69,10 @@ interface FCRAWResponse {
 interface Tester {
     run(event: FCRAWRequestEvent, ctx: FCContext): Promise<FCRAWResponse>
 }
+type asyncFunc = (event: FCRAWRequestEvent, ctx: FCContext): Promise<any>;
 
 declare module "fc-helper" {
     function hook(middleWare: FCMiddleWare)
     function test(middleWare: FCMiddleWare): Tester
-    function asyncWrap(event: FCRAWRequestEvent, ctx: FCContext): any
+    function asyncWrap(asyncFunc): any
 }
