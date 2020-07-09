@@ -18,7 +18,7 @@ describe('index.js', function () {
     var handle = hook(async function (ctx) {
       ctx.body = 'hello world!';
     });
-    const res = await test(handle).run('', '');
+    const res = await test(handle).run('');
     assert.equal(res.statusCode, 200);
     assert.equal(res.headers['content-type'], 'text/plain');
     assert.equal(res.body, 'hello world!');
@@ -28,7 +28,7 @@ describe('index.js', function () {
     var handle = hook(async function (ctx) {
       ctx.body = {ok: true};
     });
-    const res = await test(handle).run('', '');
+    const res = await test(handle).run('');
     assert.equal(res.statusCode, 200);
     assert.equal(res.headers['content-type'], 'application/json');
     assert.equal(res.body, '{"ok":true}');
@@ -39,7 +39,7 @@ describe('index.js', function () {
       ctx.type = 'application/json';
       ctx.body = '{"ok":true}';
     });
-    const res = await test(handle).run('', '');
+    const res = await test(handle).run('');
     assert.equal(res.statusCode, 200);
     assert.equal(res.headers['content-type'], 'application/json');
     assert.equal(res.body, '{"ok":true}');
@@ -50,7 +50,7 @@ describe('index.js', function () {
       ctx.type = 'application/json';
       ctx.body = {'ok':true};
     });
-    const res = await test(handle).run('', '');
+    const res = await test(handle).run('');
     assert.equal(res.statusCode, 200);
     assert.equal(res.headers['content-type'], 'application/json');
     assert.equal(res.body, '{"ok":true}');
@@ -60,7 +60,7 @@ describe('index.js', function () {
     var handle = hook(async function (ctx) {
       ctx.body = Buffer.from('hello world!');
     });
-    const res = await test(handle).run('', '');
+    const res = await test(handle).run('');
     assert.equal(res.statusCode, 200);
     assert.equal(res.headers['content-type'], 'application/octet-stream');
     assert.equal(res.body, Buffer.from('hello world!').toString('base64'));
@@ -81,7 +81,7 @@ describe('index.js', function () {
     });
     var err;
     try {
-      await test(handle).run('', '');
+      await test(handle).run('');
     } catch (ex) {
       err = ex;
     }
@@ -93,7 +93,7 @@ describe('index.js', function () {
     var handle = hook(function () {});
     var err;
     try {
-      await test(handle).run('', '');
+      await test(handle).run('');
     } catch (ex) {
       err = ex;
     }
@@ -105,7 +105,7 @@ describe('index.js', function () {
     var handle = asyncWrap(async function (ctx) {
       return 'hello world!';
     });
-    const res = await test(handle).run('', '');
+    const res = await test(handle).run('');
     assert.equal(res, 'hello world!');
   });
 
@@ -115,7 +115,7 @@ describe('index.js', function () {
     });
     var err;
     try {
-      await test(handle).run('', '');
+      await test(handle).run('');
     } catch (ex) {
       err = ex;
     }
@@ -128,7 +128,7 @@ describe('index.js', function () {
     var handle = asyncWrap(function() {});
     var err;
     try {
-      await test(handle).run('', '');
+      await test(handle).run('');
     } catch (ex) {
       err = ex;
     }
